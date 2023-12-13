@@ -1,18 +1,16 @@
-const express = require('express'); //used for express server
-const bodyParser = require('body-parser'); //used for handling/ parsing the incoming bodies
-const fs = require('fs').promises; // used for promisified fs for async operations
+const express = require('express'); 
+const bodyParser = require('body-parser'); 
+const fs = require('fs').promises; 
 
 const app = express();
 const port = 3000;
 
-// Middleware to parse JSON request bodies
 app.use(bodyParser.json());
 
 app.get('/', (req, res) =>{
     res.send("To Read File go to readFile/file.txt, To Read File go to writeFile/file.txt and To Read File go to updateFile/file.txt");
 });
 
-// ReadFile Endpoint (GET /readFile)
 app.get('/readFile/:filename', async (req, res) => {
     try {
         const { filename } = req.params;
@@ -23,7 +21,6 @@ app.get('/readFile/:filename', async (req, res) => {
     }
 });
 
-// WriteFile Endpoint (POST /writeFile)
 app.post('/writeFile/:filename', async (req, res) => {
     try {
         const { filename } = req.params;
@@ -40,7 +37,6 @@ app.post('/writeFile/:filename', async (req, res) => {
     }
 });
 
-// UpdateFile Endpoint (PUT /updateFile)
 app.put('/updateFile/:filename', async (req, res) => {
     try {
         const { filename } = req.params;
@@ -57,7 +53,6 @@ app.put('/updateFile/:filename', async (req, res) => {
     }
 });
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
     
